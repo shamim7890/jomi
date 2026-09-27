@@ -15,14 +15,39 @@ export type OverallStatus =
   | "at_risk"
   | "red_flag";
 
+/** একটি অফিসিয়াল ওয়েবসাইট/পোর্টালের লিংক */
+export interface OfficialLink {
+  label: string;
+  url: string;
+}
+
+/**
+ * একটি চেকলিস্ট আইটেমের জন্য বিস্তারিত সাহায্য গাইড।
+ * ব্যবহারকারী কনফিউজড হলে এই তথ্য দিয়ে সাহায্য করা হয়।
+ */
+export interface HelpGuide {
+  /** এক লাইনে সংক্ষিপ্ত ব্যাখ্যা */
+  summary: string;
+  /** ধাপে ধাপে করণীয় — ক্রমানুসারে */
+  steps: string[];
+  /** কোথায় যেতে হবে (অফিস/ওয়েবসাইটের নাম) — ঐচ্ছিক */
+  whereToGo?: string[];
+  /** কী কী কাগজপত্র লাগবে — ঐচ্ছিক */
+  documentsNeeded?: string[];
+  /** সরাসরি ভিজিট করার মতো অফিসিয়াল লিংক — ঐচ্ছিক */
+  officialLink?: OfficialLink;
+  /** একটি ছোট প্রো-টিপ বা সতর্কতা — ঐচ্ছিক */
+  tip?: string;
+}
+
 /** একটি চেকলিস্ট আইটেম */
 export interface ChecklistItem {
   /** স্টেপের ভেতরে ইউনিক আইডি, যেমন "step1-1" */
   id: string;
   /** ইউজারকে দেখানো লেবেল টেক্সট */
   label: string;
-  /** "কীভাবে করবেন" গাইডেন্স টেক্সট */
-  guidance: string;
+  /** "কীভাবে করবেন" বিস্তারিত গাইডেন্স */
+  guidance: HelpGuide;
   /** true হলে এই আইটেম সম্পন্ন না হলে স্টেপ "complete" ধরা হবে না */
   blocking: boolean;
   /**

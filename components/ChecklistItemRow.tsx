@@ -4,6 +4,7 @@
 
 import { useState } from "react";
 import { ChecklistItem, ItemAnswer } from "@/lib/types";
+import GuidancePanel from "./GuidancePanel";
 
 interface ChecklistItemRowProps {
   item: ChecklistItem;
@@ -55,11 +56,7 @@ export default function ChecklistItemRow({
             {showGuidance ? "গাইডেন্স লুকান" : "কীভাবে করবেন?"}
           </button>
 
-          {showGuidance ? (
-            <p className="mt-2 rounded bg-gray-50 p-2 text-sm text-gray-600">
-              {item.guidance}
-            </p>
-          ) : null}
+          {showGuidance ? <GuidancePanel guidance={item.guidance} /> : null}
         </div>
       </div>
 
